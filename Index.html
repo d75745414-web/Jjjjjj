@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+
+:root{
+--theme:#4c6fff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#05070d;
+color:white;
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:240px;
+background:#0b0e17;
+padding:25px 15px;
+display:flex;
+flex-direction:column;
+border-right:1px solid rgba(255,255,255,0.05);
+}
+
+.logo{
+font-size:22px;
+font-weight:600;
+margin-bottom:30px;
+}
+
+.logo span{
+color:var(--theme);
+}
+
+.plan{
+background:#141a33;
+padding:6px 10px;
+border-radius:6px;
+font-size:12px;
+margin-top:6px;
+display:inline-block;
+color:var(--theme);
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.menu button{
+display:flex;
+align-items:center;
+gap:12px;
+background:none;
+border:none;
+color:#9aa4c7;
+padding:12px;
+border-radius:10px;
+cursor:pointer;
+font-size:14px;
+}
+
+.menu button:hover{
+background:#11162b;
+color:white;
+}
+
+.menu .active{
+background:var(--theme);
+color:white;
+}
+
+.main{
+flex:1;
+padding:30px;
+}
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
+}
+
+.header h1{
+font-size:26px;
+margin-bottom:25px;
+}
+
+.header span{
+color:var(--theme);
+}
+
+.card{
+background:#0c1224;
+border-radius:14px;
+padding:20px;
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:20px;
+}
+
+.card i{
+font-size:22px;
+background:var(--theme);
+padding:12px;
+border-radius:10px;
+}
+
+.notice{
+background:#0c1224;
+border-radius:14px;
+padding:18px;
+color:#9aa4c7;
+border-left:4px solid var(--theme);
+}
+
+input{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:none;
+background:#0c1224;
+color:white;
+margin-top:10px;
+margin-bottom:15px;
+}
+
+button.action{
+background:var(--theme);
+border:none;
+padding:10px 16px;
+border-radius:8px;
+color:white;
+cursor:pointer;
+}
+
+label{
+font-size:14px;
+color:#9aa4c7;
+}
+
+.colorpicker{
+width:100%;
+height:40px;
+border:none;
+background:none;
+}
+
+@media(max-width:900px){
+
+.sidebar{
+position:fixed;
+bottom:0;
+width:100%;
+height:65px;
+flex-direction:row;
+padding:0;
+border-right:none;
+border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.logo,.plan{
+display:none;
+}
+
+.menu{
+flex-direction:row;
+justify-content:space-around;
+width:100%;
+}
+
+.menu button{
+flex-direction:column;
+font-size:11px;
+gap:4px;
+padding:8px;
+}
+
+.main{
+padding:20px;
+padding-bottom:90px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+<span>ZYPHER</span>
+<div class="plan">Paid</div>
+</div>
+
+<div class="menu">
+<button class="active" onclick="openTab('home',this)"><i class="fa-solid fa-house"></i>Home</button>
+<button onclick="openTab('whitelist',this)"><i class="fa-solid fa-key"></i>Whitelist</button>
+<button onclick="openTab('games',this)"><i class="fa-solid fa-gamepad"></i>Games</button>
+<button onclick="openTab('settings',this)"><i class="fa-solid fa-gear"></i>Settings</button>
+</div>
+
+</div>
+
+<div class="main">
+
+<div id="home" class="page active">
+
+<div class="header">
+<h1>Welcome back, <span id="username">Hackerman</span></h1>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-crown"></i>
+<div>
+<h3>Current Plan</h3>
+<p>Paid</p>
+</div>
+</div>
+
+<div class="notice">
+This website is still being worked on, stay tuned.
+</div>
+
+</div>
+
+<div id="whitelist" class="page">
+
+<h2>Redeem Key</h2>
+
+<input id="keybox" placeholder="Enter your key here">
+
+<button class="action" onclick="redeem()">Redeem Key</button>
+
+<p id="keyresult" style="margin-top:15px;color:#9aa4c7;"></p>
+
+</div>
+
+<div id="games" class="page">
+
+<h2>Games</h2>
+
+<p style="margin-top:10px;color:#9aa4c7;">
+Games will show soon..
+</p>
+
+</div>
+
+<div id="settings" class="page">
+
+<h2>Settings</h2>
+
+<label>Username</label>
+<input id="usernameInput" placeholder="Enter username">
+
+<button class="action" onclick="saveUsername()">Save Username</button>
+
+<br><br>
+
+<label>Theme Color</label>
+<input type="color" id="themeColor" class="colorpicker" onchange="setTheme(this.value)">
+
+</div>
+
+</div>
+
+<script>
+
+function openTab(tab,btn){
+
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
+document.getElementById(tab).classList.add("active")
+
+document.querySelectorAll(".menu button").forEach(b=>b.classList.remove("active"))
+btn.classList.add("active")
+
+}
+
+function redeem(){
+
+let key=document.getElementById("keybox").value
+
+if(key.length<3){
+document.getElementById("keyresult").innerText="Invalid key"
+}else{
+document.getElementById("keyresult").innerText="Key redeemed successfully"
+}
+
+}
+
+function saveUsername(){
+
+let name=document.getElementById("usernameInput").value
+
+if(name){
+
+localStorage.setItem("username",name)
+
+document.getElementById("username").innerText=name
+
+}
+
+}
+
+function setTheme(color){
+
+document.documentElement.style.setProperty("--theme",color)
+
+localStorage.setItem("theme",color)
+
+}
+
+window.onload=function(){
+
+let savedName=localStorage.getItem("username")
+
+if(savedName){
+document.getElementById("username").innerText=savedName
+}
+
+let savedTheme=localStorage.getItem("theme")
+
+if(savedTheme){
+
+document.documentElement.style.setProperty("--theme",savedTheme)
+
+document.getElementById("themeColor").value=savedTheme
+
+}
+
+}
+
+</script>
+
+</body>
+  </html>
