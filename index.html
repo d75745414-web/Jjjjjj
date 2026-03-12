@@ -4,360 +4,95 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
 <style>
-
-:root{
---theme:#4c6fff;
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
-
-body{
-background:#05070d;
-color:white;
-display:flex;
-min-height:100vh;
-}
-
-.sidebar{
-width:240px;
-background:#0b0e17;
-padding:25px 15px;
-display:flex;
-flex-direction:column;
-border-right:1px solid rgba(255,255,255,0.05);
-}
-
-.logo{
-font-size:22px;
-font-weight:600;
-margin-bottom:30px;
-}
-
-.logo span{
-color:var(--theme);
-}
-
-.plan{
-background:#141a33;
-padding:6px 10px;
-border-radius:6px;
-font-size:12px;
-margin-top:6px;
-display:inline-block;
-color:var(--theme);
-}
-
-.menu{
-display:flex;
-flex-direction:column;
-gap:8px;
-}
-
-.menu button{
-display:flex;
-align-items:center;
-gap:12px;
-background:none;
-border:none;
-color:#9aa4c7;
-padding:12px;
-border-radius:10px;
-cursor:pointer;
-font-size:14px;
-}
-
-.menu button:hover{
-background:#11162b;
-color:white;
-}
-
-.menu .active{
-background:var(--theme);
-color:white;
-}
-
-.main{
-flex:1;
-padding:30px;
-}
-
-.page{
-display:none;
-}
-
-.page.active{
-display:block;
-}
-
-.header h1{
-font-size:26px;
-margin-bottom:25px;
-}
-
-.header span{
-color:var(--theme);
-}
-
-.card{
-background:#0c1224;
-border-radius:14px;
-padding:20px;
-display:flex;
-align-items:center;
-gap:15px;
-margin-bottom:20px;
-}
-
-.card i{
-font-size:22px;
-background:var(--theme);
-padding:12px;
-border-radius:10px;
-}
-
-.notice{
-background:#0c1224;
-border-radius:14px;
-padding:18px;
-color:#9aa4c7;
-border-left:4px solid var(--theme);
-}
-
-.games-note{
-color:#9aa4c7;
-margin-bottom:20px;
-font-size:14px;
-}
-
-.locked{
-background:#0c1224;
-border-radius:14px;
-padding:25px;
-text-align:center;
-color:#9aa4c7;
-}
-
-input{
-width:100%;
-padding:12px;
-border-radius:8px;
-border:none;
-background:#0c1224;
-color:white;
-margin-top:10px;
-margin-bottom:15px;
-}
-
-button.action{
-background:var(--theme);
-border:none;
-padding:10px 16px;
-border-radius:8px;
-color:white;
-cursor:pointer;
-}
-
-label{
-font-size:14px;
-color:#9aa4c7;
-}
-
-.colorpicker{
-width:100%;
-height:40px;
-border:none;
-background:none;
-}
-
-.games{
-display:flex;
-flex-direction:column;
-gap:30px;
-margin-top:10px;
-}
-
-.gamecard{
-position:relative;
-border-radius:20px;
-overflow:hidden;
-background:#000;
-}
-
-.gamecard img{
-width:100%;
-height:240px;
-object-fit:cover;
-filter:brightness(.6);
-}
-
-.gamecontent{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-padding:25px;
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-}
-
-.gametitle{
-font-size:28px;
-font-weight:600;
-margin-bottom:12px;
-}
-
-.tags{
-display:flex;
-gap:10px;
-margin-bottom:15px;
-}
-
-.tag{
-background:rgba(76,111,255,0.35);
-border:1px solid rgba(76,111,255,0.6);
-padding:6px 12px;
-border-radius:20px;
-font-size:12px;
-}
-
-.launch{
-background:var(--theme);
-border:none;
-padding:14px 22px;
-border-radius:30px;
-color:white;
-font-weight:500;
-cursor:pointer;
-font-size:15px;
-display:inline-flex;
-align-items:center;
-gap:8px;
-width:220px;
-}
-
+:root{--theme:#4c6fff;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#05070d;color:white;display:flex;min-height:100vh;}
+.sidebar{width:240px;background:#0b0e17;padding:25px 15px;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,0.05);}
+.logo{font-size:22px;font-weight:600;margin-bottom:30px;}
+.logo span{color:var(--theme);}
+.plan{background:#141a33;padding:6px 10px;border-radius:6px;font-size:12px;margin-top:6px;display:inline-block;color:var(--theme);}
+.menu{display:flex;flex-direction:column;gap:8px;}
+.menu button{display:flex;align-items:center;gap:12px;background:none;border:none;color:#9aa4c7;padding:12px;border-radius:10px;cursor:pointer;font-size:14px;}
+.menu button:hover{background:#11162b;color:white;}
+.menu .active{background:var(--theme);color:white;}
+.main{flex:1;padding:30px;}
+.page{display:none;}
+.page.active{display:block;}
+.header h1{font-size:26px;margin-bottom:25px;}
+.header span{color:var(--theme);}
+.card{background:#0c1224;border-radius:14px;padding:20px;display:flex;align-items:center;gap:15px;margin-bottom:20px;}
+.card i{font-size:22px;background:var(--theme);padding:12px;border-radius:10px;}
+.notice{background:#0c1224;border-radius:14px;padding:18px;color:#9aa4c7;border-left:4px solid var(--theme);}
+.games-note{color:#9aa4c7;margin-bottom:20px;font-size:14px;}
+.locked{background:#0c1224;border-radius:14px;padding:25px;text-align:center;color:#9aa4c7;}
+input{width:100%;padding:12px;border-radius:8px;border:none;background:#0c1224;color:white;margin-top:10px;margin-bottom:15px;}
+button.action{background:var(--theme);border:none;padding:10px 16px;border-radius:8px;color:white;cursor:pointer;}
+label{font-size:14px;color:#9aa4c7;}
+.colorpicker{width:100%;height:40px;border:none;background:none;}
+.games{display:flex;flex-direction:column;gap:30px;margin-top:10px;}
+.gamecard{position:relative;border-radius:20px;overflow:hidden;background:#000;}
+.gamecard img{width:100%;height:240px;object-fit:cover;filter:brightness(.6);}
+.gamecontent{position:absolute;top:0;left:0;width:100%;height:100%;padding:25px;display:flex;flex-direction:column;justify-content:flex-end;}
+.gametitle{font-size:28px;font-weight:600;margin-bottom:12px;}
+.tags{display:flex;gap:10px;margin-bottom:15px;}
+.tag{background:rgba(76,111,255,0.35);border:1px solid rgba(76,111,255,0.6);padding:6px 12px;border-radius:20px;font-size:12px;}
+.launch{background:var(--theme);border:none;padding:14px 22px;border-radius:30px;color:white;font-weight:500;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;gap:8px;width:220px;}
 @media(max-width:900px){
-
-.sidebar{
-position:fixed;
-bottom:0;
-width:100%;
-height:65px;
-flex-direction:row;
-padding:0;
-border-right:none;
-border-top:1px solid rgba(255,255,255,0.05);
+.sidebar{position:fixed;bottom:0;width:100%;height:65px;flex-direction:row;padding:0;border-right:none;border-top:1px solid rgba(255,255,255,0.05);}
+.logo,.plan{display:none;}
+.menu{flex-direction:row;justify-content:space-around;width:100%;}
+.menu button{flex-direction:column;font-size:11px;gap:4px;padding:8px;}
+.main{padding:20px;padding-bottom:90px;}
+.gamecard img{height:200px;}
+.gametitle{font-size:22px;}
 }
-
-.logo,.plan{
-display:none;
-}
-
-.menu{
-flex-direction:row;
-justify-content:space-around;
-width:100%;
-}
-
-.menu button{
-flex-direction:column;
-font-size:11px;
-gap:4px;
-padding:8px;
-}
-
-.main{
-padding:20px;
-padding-bottom:90px;
-}
-
-.gamecard img{
-height:200px;
-}
-
-.gametitle{
-font-size:22px;
-}
-
-}
-
 </style>
 </head>
-
 <body>
-
 <div class="sidebar">
-
 <div class="logo">
 <span>ZYPHER</span>
-<div class="plan">Paid</div>
+<div class="plan" id="planLabel">Nothing</div>
 </div>
-
 <div class="menu">
 <button class="active" onclick="openTab('home',this)"><i class="fa-solid fa-house"></i>Home</button>
 <button onclick="openTab('whitelist',this)"><i class="fa-solid fa-key"></i>Whitelist</button>
 <button onclick="openTab('games',this)"><i class="fa-solid fa-gamepad"></i>Games</button>
 <button onclick="openTab('settings',this)"><i class="fa-solid fa-gear"></i>Settings</button>
 </div>
-
 </div>
-
 <div class="main">
-
 <div id="home" class="page active">
-
 <div class="header">
 <h1>Welcome back, <span id="username">Hackerman</span></h1>
 </div>
-
 <div class="card">
 <i class="fa-solid fa-crown"></i>
 <div>
 <h3>Current Plan</h3>
-<p>Paid</p>
+<p id="planText">Nothing</p>
 </div>
 </div>
-
 <div class="notice">
 This website is still being worked on, stay tuned.
 </div>
-
 </div>
-
 <div id="whitelist" class="page">
-
 <h2>Redeem Key</h2>
-
 <input id="keybox" placeholder="Enter your key here">
-
 <button class="action" onclick="redeem()">Redeem Key</button>
-
 <p id="keyresult" style="margin-top:15px;color:#9aa4c7;"></p>
-
 </div>
-
 <div id="games" class="page">
-
 <div id="gamesLocked" class="locked">
 You must redeem a valid key in the Whitelist tab to view the games.
 </div>
-
 <div id="gamesContent" style="display:none;">
-
 <div class="games-note">
 Keep in mind these aren't all of the games, new games will show daily.
 </div>
-
 <div class="games">
-
 <div class="gamecard">
 <img src="https://tr.rbxcdn.com/180DAY-28d78babc49f65a9622e837b84cef0e5/768/432/Image/Webp/noFilter">
 <div class="gamecontent">
@@ -370,7 +105,6 @@ Keep in mind these aren't all of the games, new games will show daily.
 </a>
 </div>
 </div>
-
 <div class="gamecard">
 <img src="https://t3.rbxcdn.com/180DAY-58d59bfe7584647d43085d18c3e9d679">
 <div class="gamecontent">
@@ -383,7 +117,6 @@ Keep in mind these aren't all of the games, new games will show daily.
 </a>
 </div>
 </div>
-
 <div class="gamecard">
 <img src="https://tr.rbxcdn.com/180DAY-8b3142706595997f492d4ae44b8338d4/768/432/Image/Webp/noFilter">
 <div class="gamecontent">
@@ -396,96 +129,86 @@ Keep in mind these aren't all of the games, new games will show daily.
 </a>
 </div>
 </div>
-
+<div class="gamecard">
+<img src="https://tr.rbxcdn.com/180DAY-2487409400032c4e9b4afab6575af1f3/768/432/Image/Webp/noFilter">
+<div class="gamecontent">
+<div class="gametitle">[☢️] Steal a Memerot</div>
+<div class="tags">
+<div class="tag">Popular</div>
 </div>
-
+<a href="https://www.roblox.com/games/140694733757617" target="_blank">
+<button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button>
+</a>
 </div>
-
 </div>
-
+</div>
+</div>
+</div>
 <div id="settings" class="page">
-
 <h2>Settings</h2>
-
 <label>Username</label>
 <input id="usernameInput" placeholder="Enter username">
-
 <button class="action" onclick="saveUsername()">Save Username</button>
-
 <br><br>
-
 <label>Theme Color</label>
 <input type="color" id="themeColor" class="colorpicker" onchange="setTheme(this.value)">
-
 </div>
-
 </div>
-
 <script>
-
 const validKeys=[
 "key_2o273737eu8373uejeje883838eisidjdj383938s88d8d8d7e7euu32i2i2uejed99d8d83i3i3",
 "key_2o2838i3u3u3u3ueuehehei8e8e8eieididjdjdjjrjejejejejejejeid8d8dejeje",
 "key_eeeijejejejejejejeeieisisidiidieiei3ieieiejejejdjjdd8d88d7eueyehehejejekeeie8"
-]
-
+];
 function openTab(tab,btn){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
-document.getElementById(tab).classList.add("active")
-document.querySelectorAll(".menu button").forEach(b=>b.classList.remove("active"))
-btn.classList.add("active")
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById(tab).classList.add("active");
+document.querySelectorAll(".menu button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
 }
-
 function redeem(){
-let key=document.getElementById("keybox").value
-
+let key=document.getElementById("keybox").value;
 if(validKeys.includes(key)){
-localStorage.setItem("whitelisted","true")
-document.getElementById("keyresult").innerText="Key redeemed successfully"
-unlockGames()
+localStorage.setItem("whitelisted","true");
+document.getElementById("keyresult").innerText="Key redeemed successfully";
+document.getElementById("planText").innerText="Paid";
+document.getElementById("planLabel").innerText="Paid";
+unlockGames();
 }else{
-document.getElementById("keyresult").innerText="Invalid key"
+document.getElementById("keyresult").innerText="Invalid key";
 }
 }
-
 function unlockGames(){
 if(localStorage.getItem("whitelisted")==="true"){
-document.getElementById("gamesLocked").style.display="none"
-document.getElementById("gamesContent").style.display="block"
+document.getElementById("gamesLocked").style.display="none";
+document.getElementById("gamesContent").style.display="block";
+document.getElementById("planText").innerText="Paid";
+document.getElementById("planLabel").innerText="Paid";
 }
 }
-
 function saveUsername(){
-let name=document.getElementById("usernameInput").value
+let name=document.getElementById("usernameInput").value;
 if(name){
-localStorage.setItem("username",name)
-document.getElementById("username").innerText=name
+localStorage.setItem("username",name);
+document.getElementById("username").innerText=name;
 }
 }
-
 function setTheme(color){
-document.documentElement.style.setProperty("--theme",color)
-localStorage.setItem("theme",color)
+document.documentElement.style.setProperty("--theme",color);
+localStorage.setItem("theme",color);
 }
-
 window.onload=function(){
-
-let savedName=localStorage.getItem("username")
+let savedName=localStorage.getItem("username");
 if(savedName){
-document.getElementById("username").innerText=savedName
+document.getElementById("username").innerText=savedName;
 }
-
-let savedTheme=localStorage.getItem("theme")
+let savedTheme=localStorage.getItem("theme");
 if(savedTheme){
-document.documentElement.style.setProperty("--theme",savedTheme)
-document.getElementById("themeColor").value=savedTheme
+document.documentElement.style.setProperty("--theme",savedTheme);
+document.getElementById("themeColor").value=savedTheme;
 }
-
-unlockGames()
-
+unlockGames();
 }
-
 </script>
-
 </body>
-</html>
+  </html>
