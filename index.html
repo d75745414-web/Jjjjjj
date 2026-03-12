@@ -2,57 +2,63 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZYPHER</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <style>
-:root{--theme:#4c6fff;}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
-body{background:#05070d;color:white;display:flex;min-height:100vh;}
-.sidebar{width:240px;background:#0b0e17;padding:25px 15px;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,0.05);}
-.logo{font-size:22px;font-weight:600;margin-bottom:30px;}
-.logo span{color:var(--theme);}
-.plan{background:#141a33;padding:6px 10px;border-radius:6px;font-size:12px;margin-top:6px;display:inline-block;color:var(--theme);}
-.menu{display:flex;flex-direction:column;gap:8px;}
-.menu button{display:flex;align-items:center;gap:12px;background:none;border:none;color:#9aa4c7;padding:12px;border-radius:10px;cursor:pointer;font-size:14px;}
-.menu button:hover{background:#11162b;color:white;}
-.menu .active{background:var(--theme);color:white;}
-.main{flex:1;padding:30px;}
-.page{display:none;}
-.page.active{display:block;}
-.header h1{font-size:26px;margin-bottom:25px;}
-.header span{color:var(--theme);}
-.card{background:#0c1224;border-radius:14px;padding:20px;display:flex;align-items:center;gap:15px;margin-bottom:20px;}
-.card i{font-size:22px;background:var(--theme);padding:12px;border-radius:10px;}
-.notice{background:#0c1224;border-radius:14px;padding:18px;color:#9aa4c7;border-left:4px solid var(--theme);}
-.games-note{color:#9aa4c7;margin-bottom:20px;font-size:14px;}
-.locked{background:#0c1224;border-radius:14px;padding:25px;text-align:center;color:#9aa4c7;}
-input{width:100%;padding:12px;border-radius:8px;border:none;background:#0c1224;color:white;margin-top:10px;margin-bottom:15px;}
-button.action{background:var(--theme);border:none;padding:10px 16px;border-radius:8px;color:white;cursor:pointer;}
-label{font-size:14px;color:#9aa4c7;}
-.colorpicker{width:100%;height:40px;border:none;background:none;}
-.games{display:flex;flex-direction:column;gap:30px;margin-top:10px;}
-.gamecard{position:relative;border-radius:20px;overflow:hidden;background:#000;}
-.gamecard img{width:100%;height:240px;object-fit:cover;filter:brightness(.6);}
-.gamecontent{position:absolute;top:0;left:0;width:100%;height:100%;padding:25px;display:flex;flex-direction:column;justify-content:flex-end;}
-.gametitle{font-size:28px;font-weight:600;margin-bottom:12px;}
-.tags{display:flex;gap:10px;margin-bottom:15px;}
-.tag{background:rgba(76,111,255,0.35);border:1px solid rgba(76,111,255,0.6);padding:6px 12px;border-radius:20px;font-size:12px;}
-.launch{background:var(--theme);border:none;padding:14px 22px;border-radius:30px;color:white;font-weight:500;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;gap:8px;width:220px;}
+:root{--theme:#4c6fff}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:#05070d;color:white;display:flex;min-height:100vh}
+.sidebar{width:240px;background:#0b0e17;padding:25px 15px;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.05)}
+.logo{font-size:22px;font-weight:600;margin-bottom:30px;color:white}
+.logo span{color:var(--theme)}
+.plan{background:#141a33;padding:6px 10px;border-radius:6px;font-size:12px;margin-top:6px;display:inline-block;color:var(--theme)}
+.menu{display:flex;flex-direction:column;gap:8px}
+.menu button{display:flex;align-items:center;gap:12px;background:none;border:none;color:#9aa4c7;padding:12px;border-radius:10px;cursor:pointer;font-size:14px}
+.menu button:hover{background:#11162b;color:white}
+.menu .active{background:var(--theme);color:white}
+.main{flex:1;padding:30px}
+.page{display:none}
+.page.active{display:block}
+.header h1{font-size:26px;margin-bottom:25px}
+.header span{color:var(--theme)}
+.card{background:#0c1224;border-radius:14px;padding:20px;display:flex;align-items:center;gap:15px;margin-bottom:20px}
+.card i{font-size:22px;background:var(--theme);padding:12px;border-radius:10px}
+.notice{background:#0c1224;border-radius:14px;padding:18px;color:#9aa4c7;border-left:4px solid var(--theme);margin-bottom:20px}
+.activity{background:#0c1224;border-radius:14px;padding:20px;margin-top:10px}
+.activity h3{margin-bottom:15px}
+.activity h3 i{margin-right:8px;color:var(--theme)}
+.activity-item{display:flex;justify-content:space-between;align-items:center;background:#090f1f;padding:14px;border-radius:10px}
+.activity-item button{background:var(--theme);border:none;padding:8px 14px;border-radius:8px;color:white;cursor:pointer}
+.games-note{color:#9aa4c7;margin-bottom:20px;font-size:14px}
+.locked{background:#0c1224;border-radius:14px;padding:25px;text-align:center;color:#9aa4c7}
+input{width:100%;padding:12px;border-radius:8px;border:none;background:#0c1224;color:white;margin-top:10px;margin-bottom:15px}
+button.action{background:var(--theme);border:none;padding:10px 16px;border-radius:8px;color:white;cursor:pointer}
+label{font-size:14px;color:#9aa4c7}
+.colorpicker{width:100%;height:40px;border:none;background:none}
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:25px}
+.gamecard{position:relative;border-radius:20px;overflow:hidden;background:#000;height:200px}
+.gamecard img{width:100%;height:100%;object-fit:cover;filter:brightness(.6)}
+.gamecontent{position:absolute;top:0;left:0;width:100%;height:100%;padding:20px;display:flex;flex-direction:column;justify-content:flex-end}
+.gametitle{font-size:20px;font-weight:600;margin-bottom:10px}
+.tags{display:flex;gap:8px;margin-bottom:12px}
+.tag{background:rgba(76,111,255,.35);border:1px solid rgba(76,111,255,.6);padding:5px 10px;border-radius:20px;font-size:11px}
+.launch{background:var(--theme);border:none;padding:10px 16px;border-radius:30px;color:white;font-weight:500;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:6px;width:160px}
 @media(max-width:900px){
-.sidebar{position:fixed;bottom:0;width:100%;height:65px;flex-direction:row;padding:0;border-right:none;border-top:1px solid rgba(255,255,255,0.05);}
-.logo,.plan{display:none;}
-.menu{flex-direction:row;justify-content:space-around;width:100%;}
-.menu button{flex-direction:column;font-size:11px;gap:4px;padding:8px;}
-.main{padding:20px;padding-bottom:90px;}
-.gamecard img{height:200px;}
-.gametitle{font-size:22px;}
+.sidebar{position:fixed;bottom:0;width:100%;height:65px;flex-direction:row;padding:0;border-right:none;border-top:1px solid rgba(255,255,255,.05)}
+.logo,.plan{display:none}
+.menu{flex-direction:row;justify-content:space-around;width:100%}
+.menu button{flex-direction:column;font-size:11px;gap:4px;padding:8px}
+.main{padding:20px;padding-bottom:90px}
+.games{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
+
 <div class="sidebar">
 <div class="logo">
-<span>ZYPHER</span>
+ZY<span>PHER</span>
 <div class="plan" id="planLabel">Nothing</div>
 </div>
 <div class="menu">
@@ -62,11 +68,14 @@ label{font-size:14px;color:#9aa4c7;}
 <button onclick="openTab('settings',this)"><i class="fa-solid fa-gear"></i>Settings</button>
 </div>
 </div>
+
 <div class="main">
+
 <div id="home" class="page active">
 <div class="header">
 <h1>Welcome back, <span id="username">Hackerman</span></h1>
 </div>
+
 <div class="card">
 <i class="fa-solid fa-crown"></i>
 <div>
@@ -74,31 +83,54 @@ label{font-size:14px;color:#9aa4c7;}
 <p id="planText">Nothing</p>
 </div>
 </div>
+
 <div class="notice">
 This website is still being worked on, stay tuned.
 </div>
+
+<div class="activity">
+<h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity</h3>
+<div class="activity-item">
+<span>Games</span>
+<button onclick="goRecent()">Go To</button>
 </div>
+</div>
+
+<div class="card" style="margin-top:20px">
+<i class="fa-solid fa-code-branch"></i>
+<div>
+<h3>Version</h3>
+<p>V2.2</p>
+</div>
+</div>
+</div>
+
 <div id="whitelist" class="page">
 <h2>Redeem Key</h2>
 <input id="keybox" placeholder="Enter your key here">
 <button class="action" onclick="redeem()">Redeem Key</button>
-<p id="keyresult" style="margin-top:15px;color:#9aa4c7;"></p>
+<p id="keyresult" style="margin-top:15px;color:#9aa4c7"></p>
 </div>
+
 <div id="games" class="page">
+
 <div id="gamesLocked" class="locked">
 You must redeem a valid key in the Whitelist tab to view the games.
 </div>
-<div id="gamesContent" style="display:none;">
+
+<div id="gamesContent" style="display:none">
+
 <div class="games-note">
-Keep in mind these aren't all of the games, new games will show daily.
+keep in mind these aren't all of the games, new games will show daily.
 </div>
+
 <div class="games">
 
 <div class="gamecard">
 <img src="https://tr.rbxcdn.com/180DAY-28d78babc49f65a9622e837b84cef0e5/768/432/Image/Webp/noFilter">
 <div class="gamecontent">
 <div class="gametitle">Escape From Walls By Brainrots!</div>
-<div class="tags"><div class="tag">Trending</div></div>
+<div class="tags"><div class="tag">Game</div></div>
 <a href="https://www.roblox.com/games/139978323180972" target="_blank">
 <button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button>
 </a>
@@ -109,7 +141,7 @@ Keep in mind these aren't all of the games, new games will show daily.
 <img src="https://t3.rbxcdn.com/180DAY-58d59bfe7584647d43085d18c3e9d679">
 <div class="gamecontent">
 <div class="gametitle">Safari WarFare🔫🗡️🦁</div>
-<div class="tags"><div class="tag">Action</div></div>
+<div class="tags"><div class="tag">Game</div></div>
 <a href="https://www.roblox.com/games/79283758423880" target="_blank">
 <button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button>
 </a>
@@ -131,7 +163,7 @@ Keep in mind these aren't all of the games, new games will show daily.
 <img src="https://tr.rbxcdn.com/180DAY-2487409400032c4e9b4afab6575af1f3/768/432/Image/Webp/noFilter">
 <div class="gamecontent">
 <div class="gametitle">[☢️] Steal a Memerot</div>
-<div class="tags"><div class="tag">Popular</div></div>
+<div class="tags"><div class="tag">Game</div></div>
 <a href="https://www.roblox.com/games/140694733757617" target="_blank">
 <button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button>
 </a>
@@ -153,7 +185,7 @@ Keep in mind these aren't all of the games, new games will show daily.
 <img src="https://tr.rbxcdn.com/180DAY-1af5b86185469adfd35a0110d42f90fc/768/432/Image/Webp/noFilter">
 <div class="gamecontent">
 <div class="gametitle">Kirov RP</div>
-<div class="tags"><div class="tag">Roleplay</div></div>
+<div class="tags"><div class="tag">RP</div></div>
 <a href="https://www.roblox.com/games/104663575229835" target="_blank">
 <button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button>
 </a>
@@ -166,6 +198,28 @@ Keep in mind these aren't all of the games, new games will show daily.
 <div class="gametitle">{BETA} Bisaya Hangout Relapse Tara tambay!</div>
 <div class="tags"><div class="tag">Hangout</div></div>
 <a href="https://www.roblox.com/games/81128955313015" target="_blank">
+<button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button>
+</a>
+</div>
+</div>
+
+<div class="gamecard">
+<img src="https://t3.rbxcdn.com/180DAY-e559fde711d62cc11604158b5f39187c">
+<div class="gamecontent">
+<div class="gametitle">[AHORA]Escapa Del Tsunami Por mini Brainrots</div>
+<div class="tags"><div class="tag">Escape</div></div>
+<a href="https://www.roblox.com/games/81463678716387" target="_blank">
+<button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button>
+</a>
+</div>
+</div>
+
+<div class="gamecard">
+<img src="https://tr.rbxcdn.com/180DAY-c684be1e6b6b8127fd4a45126551221a/768/432/Image/Png/noFilter">
+<div class="gamecontent">
+<div class="gametitle">Doggy Walk Simulator</div>
+<div class="tags"><div class="tag">Simulator</div></div>
+<a href="https://www.roblox.com/games/76661153422640" target="_blank">
 <button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button>
 </a>
 </div>
@@ -184,6 +238,7 @@ Keep in mind these aren't all of the games, new games will show daily.
 <label>Theme Color</label>
 <input type="color" id="themeColor" class="colorpicker" onchange="setTheme(this.value)">
 </div>
+
 </div>
 
 <script>
@@ -191,59 +246,61 @@ const validKeys=[
 "key_2o273737eu8373uejeje883838eisidjdj383938s88d8d8d7e7euu32i2i2uejed99d8d83i3i3",
 "key_2o2838i3u3u3u3ueuehehei8e8e8eieididjdjdjjrjejejejejejejeid8d8dejeje",
 "key_eeeijejejejejejejeeieisisidiidieiei3ieieiejejejdjjdd8d88d7eueyehehejejekeeie8"
-];
+]
 
 function openTab(tab,btn){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-document.getElementById(tab).classList.add("active");
-document.querySelectorAll(".menu button").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
+document.getElementById(tab).classList.add("active")
+document.querySelectorAll(".menu button").forEach(b=>b.classList.remove("active"))
+btn.classList.add("active")
+}
+
+function goRecent(){
+document.querySelectorAll(".menu button")[2].click()
 }
 
 function redeem(){
-let key=document.getElementById("keybox").value;
+let key=document.getElementById("keybox").value
 if(validKeys.includes(key)){
-localStorage.setItem("whitelisted","true");
-document.getElementById("keyresult").innerText="Key redeemed successfully";
-document.getElementById("planText").innerText="Paid";
-document.getElementById("planLabel").innerText="Paid";
-unlockGames();
+localStorage.setItem("whitelisted","true")
+document.getElementById("keyresult").innerText="Key redeemed successfully"
+unlockGames()
 }else{
-document.getElementById("keyresult").innerText="Invalid key";
+document.getElementById("keyresult").innerText="Invalid key"
 }
 }
 
 function unlockGames(){
 if(localStorage.getItem("whitelisted")==="true"){
-document.getElementById("gamesLocked").style.display="none";
-document.getElementById("gamesContent").style.display="block";
-document.getElementById("planText").innerText="Paid";
-document.getElementById("planLabel").innerText="Paid";
+document.getElementById("gamesLocked").style.display="none"
+document.getElementById("gamesContent").style.display="block"
+document.getElementById("planText").innerText="Paid"
+document.getElementById("planLabel").innerText="Paid"
 }
 }
 
 function saveUsername(){
-let name=document.getElementById("usernameInput").value;
+let name=document.getElementById("usernameInput").value
 if(name){
-localStorage.setItem("username",name);
-document.getElementById("username").innerText=name;
+localStorage.setItem("username",name)
+document.getElementById("username").innerText=name
 }
 }
 
 function setTheme(color){
-document.documentElement.style.setProperty("--theme",color);
-localStorage.setItem("theme",color);
+document.documentElement.style.setProperty("--theme",color)
+localStorage.setItem("theme",color)
 }
 
 window.onload=function(){
-let savedName=localStorage.getItem("username");
-if(savedName){document.getElementById("username").innerText=savedName;}
-let savedTheme=localStorage.getItem("theme");
+let savedName=localStorage.getItem("username")
+if(savedName){document.getElementById("username").innerText=savedName}
+let savedTheme=localStorage.getItem("theme")
 if(savedTheme){
-document.documentElement.style.setProperty("--theme",savedTheme);
-document.getElementById("themeColor").value=savedTheme;
+document.documentElement.style.setProperty("--theme",savedTheme)
+document.getElementById("themeColor").value=savedTheme
 }
-unlockGames();
+unlockGames()
 }
 </script>
 
