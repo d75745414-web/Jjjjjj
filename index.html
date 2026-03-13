@@ -31,7 +31,6 @@ body{background:#05070d;color:white;display:flex;min-height:100vh}
 .activity-item{display:flex;justify-content:space-between;align-items:center;background:#090f1f;padding:14px;border-radius:10px}
 .activity-item button{background:var(--theme);border:none;padding:8px 14px;border-radius:8px;color:white;cursor:pointer}
 .games-note{color:#9aa4c7;margin-bottom:20px;font-size:14px}
-.locked{background:#0c1224;border-radius:14px;padding:25px;text-align:center;color:#9aa4c7}
 input{width:100%;padding:12px;border-radius:8px;border:none;background:#0c1224;color:white;margin-top:10px;margin-bottom:15px}
 button.action{background:var(--theme);border:none;padding:10px 16px;border-radius:8px;color:white;cursor:pointer}
 label{font-size:14px;color:#9aa4c7}
@@ -44,6 +43,7 @@ label{font-size:14px;color:#9aa4c7}
 .tags{display:flex;gap:8px;margin-bottom:12px}
 .tag{background:rgba(76,111,255,.35);border:1px solid rgba(76,111,255,.6);padding:5px 10px;border-radius:20px;font-size:11px}
 .launch{background:var(--theme);border:none;padding:10px 16px;border-radius:30px;color:white;font-weight:500;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:6px;width:160px}
+.blurred{filter:blur(8px);pointer-events:none;user-select:none}
 @media(max-width:900px){
 .sidebar{position:fixed;bottom:0;width:100%;height:65px;flex-direction:row;padding:0;border-right:none;border-top:1px solid rgba(255,255,255,.05)}
 .logo,.plan{display:none}
@@ -114,17 +114,11 @@ This website is still being worked on, stay tuned.
 
 <div id="games" class="page">
 
-<div id="gamesLocked" class="locked">
-You must redeem a valid key in the Whitelist tab to view the games.
-</div>
-
-<div id="gamesContent" style="display:none">
-
 <div class="games-note">
 keep in mind these aren't all of the games, new games will show daily.
 </div>
 
-<div class="games">
+<div id="gamesContent" class="games">
 
 <div class="gamecard">
 <img src="https://tr.rbxcdn.com/180DAY-28d78babc49f65a9622e837b84cef0e5/768/432/Image/Webp/noFilter">
@@ -249,7 +243,6 @@ keep in mind these aren't all of the games, new games will show daily.
 
 </div>
 </div>
-</div>
 
 <div id="settings" class="page">
 <h2>Settings</h2>
@@ -294,10 +287,11 @@ document.getElementById("keyresult").innerText="Invalid key"
 
 function unlockGames(){
 if(localStorage.getItem("whitelisted")==="true"){
-document.getElementById("gamesLocked").style.display="none"
-document.getElementById("gamesContent").style.display="block"
+document.getElementById("gamesContent").classList.remove("blurred")
 document.getElementById("planText").innerText="Paid"
 document.getElementById("planLabel").innerText="Paid"
+}else{
+document.getElementById("gamesContent").classList.add("blurred")
 }
 }
 
