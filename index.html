@@ -26,19 +26,23 @@ body{background:#05070d;color:white;display:flex;min-height:100vh;opacity:0;tran
 .header span{color:var(--theme)}
 .card{background:#0c1224;border-radius:14px;padding:20px;display:flex;align-items:center;gap:15px;margin-bottom:20px}
 .card i{font-size:22px;background:var(--theme);padding:12px;border-radius:10px}
-.notice{background:#0c1224;border-radius:14px;padding:18px;color:#9aa4c7;border-left:4px solid var(--theme);margin-bottom:20px}
 .activity{background:#0c1224;border-radius:14px;padding:20px;margin-top:10px}
 .activity-item{display:flex;justify-content:space-between;align-items:center;background:#090f1f;padding:14px;border-radius:10px}
 .activity-item button{background:var(--theme);border:none;padding:8px 14px;border-radius:8px;color:white;cursor:pointer;transition:.25s}
 .activity-item button:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 0 10px rgba(76,111,255,.6)}
 .activity-item button:active{transform:scale(.9)}
 .games-note{color:#9aa4c7;margin-bottom:20px;font-size:14px}
+.search-container{margin-bottom:20px;position:relative}
+.search-input{width:100%;padding:14px 16px 14px 45px;border-radius:12px;border:none;background:#0c1224;color:white;font-size:16px;outline:none;box-shadow:0 0 0 2px rgba(76,111,255,0.1);transition:0.3s}
+.search-input:focus{box-shadow:0 0 0 3px rgba(76,111,255,0.3)}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#9aa4c7;font-size:18px}
 input{width:100%;padding:12px;border-radius:8px;border:none;background:#0c1224;color:white;margin-top:10px;margin-bottom:15px}
 button.action{background:var(--theme);border:none;padding:10px 16px;border-radius:8px;color:white;cursor:pointer;transition:.25s}
 button.action:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 0 12px rgba(76,111,255,.7)}
 button.action:active{transform:scale(.92)}
 .games{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:25px}
-.gamecard{position:relative;border-radius:20px;overflow:hidden;background:#000;height:200px}
+.gamecard{position:relative;border-radius:20px;overflow:hidden;background:#000;height:200px;display:none}
+.gamecard.visible{display:block}
 .gamecard img{width:100%;height:100%;object-fit:cover;filter:brightness(.6)}
 .gamecontent{position:absolute;top:0;left:0;width:100%;height:100%;padding:20px;display:flex;flex-direction:column;justify-content:flex-end}
 .gametitle{font-size:20px;font-weight:600;margin-bottom:10px}
@@ -76,8 +80,12 @@ ZY<span>PHER</span>
 <p id="planText">Nothing</p>
 </div>
 </div>
-<div class="notice">
-This website is still being worked on, stay tuned.
+<div class="card" id="gamesCountCard" style="margin-top:20px">
+<i class="fa-solid fa-gamepad"></i>
+<div>
+<h3>Games Available</h3>
+<p id="gamesCount">17</p>
+</div>
 </div>
 <div class="activity">
 <h3>Recent Activity</h3>
@@ -101,23 +109,24 @@ This website is still being worked on, stay tuned.
 <p id="keyresult" style="margin-top:15px;color:#9aa4c7"></p>
 </div>
 <div id="games" class="page">
-<div class="games-note">
-keep in mind these aren't all of the games, new games will show daily.
+<div class="search-container">
+<i class="fa-solid fa-search search-icon"></i>
+<input type="text" id="gameSearch" class="search-input" placeholder="Search games...">
 </div>
 <div id="gamesContent" class="games blurred">
-<div class="gamecard"><img src="https://tr.rbxcdn.com/180DAY-28d78babc49f65a9622e837b84cef0e5/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">Escape From Walls By Brainrots!</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/139978323180972" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://t3.rbxcdn.com/180DAY-58d59bfe7584647d43085d18c3e9d679"><div class="gamecontent"><div class="gametitle">Safari WarFare🔫🗡️🦁</div><div class="tags"><div class="tag">PvP</div></div><a href="https://www.roblox.com/games/79283758423880" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://tr.rbxcdn.com/180DAY-8b3142706595997f492d4ae44b8338d4/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">HORROR BROOKHAVEN</div><div class="tags"><div class="tag">Horror</div></div><a href="https://www.roblox.com/games/82354958606054" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://tr.rbxcdn.com/180DAY-2487409400032c4e9b4afab6575af1f3/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[☢️] Steal a Memerot</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/140694733757617" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://t6.rbxcdn.com/180DAY-3de571ed1175636497776c44426b9765"><div class="gamecontent"><div class="gametitle">candy obby [ADMIN ABUSE]</div><div class="tags"><div class="tag">Obby</div></div><a href="https://www.roblox.com/games/77440417917542" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://tr.rbxcdn.com/180DAY-1af5b86185469adfd35a0110d42f90fc/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">Kirov RP</div><div class="tags"><div class="tag">RP</div></div><a href="https://www.roblox.com/games/104663575229835" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://tr.rbxcdn.com/180DAY-ce5f9ff2899184667f796765b7947939/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">{BETA} Bisaya Hangout Relapse Tara tambay!</div><div class="tags"><div class="tag">Hangout</div></div><a href="https://www.roblox.com/games/81128955313015" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://t3.rbxcdn.com/180DAY-e559fde711d62cc11604158b5f39187c"><div class="gamecontent"><div class="gametitle">[AHORA]Escapa Del Tsunami Por mini Brainrots</div><div class="tags"><div class="tag">Escape</div></div><a href="https://www.roblox.com/games/81463678716387" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://tr.rbxcdn.com/180DAY-c684be1e6b6b8127fd4a45126551221a/768/432/Image/Png/noFilter"><div class="gamecontent"><div class="gametitle">Doggy Walk Simulator</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/76661153422640" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://tr.rbxcdn.com/180DAY-3fd204cee7e51dedf72ff16fd7849dcd/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">CLICK TO GODMODE: INFINITE ASCENSION</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/92333379027390" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://tr.rbxcdn.com/180DAY-931acef35c3d23ad6627b7452bcd510f/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[ 🌑 ]Survive Tsunami For Brainrots!</div><div class="tags"><div class="tag">Survival</div></div><a href="https://www.roblox.com/games/114720820797718" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard"><img src="https://tr.rbxcdn.com/180DAY-173a0171fa05cfbc89a87fc30adabd41/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[🪐] Meme Chest Simulator</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/111312094596605" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
-<div class="gamecard">
+<div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-28d78babc49f65a9622e837b84cef0e5/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">Escape From Walls By Brainrots!</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/139978323180972" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://t3.rbxcdn.com/180DAY-58d59bfe7584647d43085d18c3e9d679"><div class="gamecontent"><div class="gametitle">Safari WarFare🔫🗡️🦁</div><div class="tags"><div class="tag">PvP</div></div><a href="https://www.roblox.com/games/79283758423880" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-8b3142706595997f492d4ae44b8338d4/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">HORROR BROOKHAVEN</div><div class="tags"><div class="tag">Horror</div></div><a href="https://www.roblox.com/games/82354958606054" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-2487409400032c4e9b4afab6575af1f3/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[☢️] Steal a Memerot</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/140694733757617" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://t6.rbxcdn.com/180DAY-3de571ed1175636497776c44426b9765"><div class="gamecontent"><div class="gametitle">candy obby [ADMIN ABUSE]</div><div class="tags"><div class="tag">Obby</div></div><a href="https://www.roblox.com/games/77440417917542" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-1af5b86185469adfd35a0110d42f90fc/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">Kirov RP</div><div class="tags"><div class="tag">RP</div></div><a href="https://www.roblox.com/games/104663575229835" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-ce5f9ff2899184667f796765b7947939/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">{BETA} Bisaya Hangout Relapse Tara tambay!</div><div class="tags"><div class="tag">Hangout</div></div><a href="https://www.roblox.com/games/81128955313015" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://t3.rbxcdn.com/180DAY-e559fde711d62cc11604158b5f39187c"><div class="gamecontent"><div class="gametitle">[AHORA]Escapa Del Tsunami Por mini Brainrots</div><div class="tags"><div class="tag">Escape</div></div><a href="https://www.roblox.com/games/81463678716387" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-c684be1e6b6b8127fd4a45126551221a/768/432/Image/Png/noFilter"><div class="gamecontent"><div class="gametitle">Doggy Walk Simulator</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/76661153422640" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-3fd204cee7e51dedf72ff16fd7849dcd/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">CLICK TO GODMODE: INFINITE ASCENSION</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/92333379027390" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-931acef35c3d23ad6627b7452bcd510f/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[ 🌑 ]Survive Tsunami For Brainrots!</div><div class="tags"><div class="tag">Survival</div></div><a href="https://www.roblox.com/games/114720820797718" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-173a0171fa05cfbc89a87fc30adabd41/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[🪐] Meme Chest Simulator</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/111312094596605" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+<div class="gamecard visible">
 <img src="https://t1.rbxcdn.com/180DAY-5122734d944cbdf2dd3799d142e6ec9e" alt="[CONSOLE] Steal a Brainrot [CONTENT SERVER]">
 <div class="gamecontent">
 <div class="gametitle">[CONSOLE] Steal a Brainrot [CONTENT SERVER]</div>
@@ -126,6 +135,58 @@ keep in mind these aren't all of the games, new games will show daily.
 <div class="tag">Console</div>
 </div>
 <a href="https://www.roblox.com/games/108197681008793" target="_blank">
+<button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button>
+</a>
+</div>
+</div>
+<div class="gamecard visible">
+<img src="https://t5.rbxcdn.com/180DAY-c239841c976f825fcf18284efdd1955a" alt="(RELEASED) Wallhop For Brainrots!🧗">
+<div class="gamecontent">
+<div class="gametitle">(RELEASED) Wallhop For Brainrots!🧗</div>
+<div class="tags">
+<div class="tag">Obby</div>
+<div class="tag">Parkour</div>
+</div>
+<a href="https://www.roblox.com/games/78728987066365" target="_blank">
+<button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button>
+</a>
+</div>
+</div>
+<div class="gamecard visible">
+<img src="https://tr.rbxcdn.com/180DAY-a2799d7681bb3de2a9491e73c6cd6799/768/432/Image/Webp/noFilter" alt="survive the hospital">
+<div class="gamecontent">
+<div class="gametitle">survive the hospital</div>
+<div class="tags">
+<div class="tag">Horror</div>
+<div class="tag">Survival</div>
+</div>
+<a href="https://www.roblox.com/games/91998692525512" target="_blank">
+<button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button>
+</a>
+</div>
+</div>
+<div class="gamecard visible">
+<img src="https://t2.rbxcdn.com/180DAY-67b2be37ae31be00ab1319901b9d8347" alt="Roblox Tycoon Simulator">
+<div class="gamecontent">
+<div class="gametitle">Roblox Tycoon Simulator</div>
+<div class="tags">
+<div class="tag">Tycoon</div>
+<div class="tag">Simulator</div>
+</div>
+<a href="https://www.roblox.com/games/123703214404726" target="_blank">
+<button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button>
+</a>
+</div>
+</div>
+<div class="gamecard visible">
+<img src="https://tr.rbxcdn.com/180DAY-64ed83b556c759e8e2cd5b3f495c72a6/768/432/Image/Webp/noFilter" alt="Survive LAVA for Brainrots!">
+<div class="gamecontent">
+<div class="gametitle">Survive LAVA for Brainrots!</div>
+<div class="tags">
+<div class="tag">Survival</div>
+<div class="tag">Brainrot</div>
+</div>
+<a href="https://www.roblox.com/games/114720820797718" target="_blank">
 <button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button>
 </a>
 </div>
@@ -148,6 +209,24 @@ function unlockGames(){document.getElementById("gamesContent").classList.remove(
 function saveUsername(){let name=document.getElementById("usernameInput").value;if(name){localStorage.setItem("username",name);document.getElementById("username").innerText=name}}
 if(localStorage.getItem("username")){document.getElementById("username").innerText=localStorage.getItem("username")}
 if(localStorage.getItem("whitelisted")){unlockGames()}
+
+document.getElementById("gameSearch").addEventListener("input", function(e) {
+  const searchTerm = e.target.value.toLowerCase().trim();
+  const cards = document.querySelectorAll(".gamecard");
+  let visibleCount = 0;
+  
+  cards.forEach(card => {
+    const title = card.querySelector(".gametitle").textContent.toLowerCase();
+    if (searchTerm === "" || title.includes(searchTerm)) {
+      card.classList.add("visible");
+      visibleCount++;
+    } else {
+      card.classList.remove("visible");
+    }
+  });
+  
+  document.getElementById("gamesCount").textContent = visibleCount;
+});
 </script>
 </body>
   </html>
