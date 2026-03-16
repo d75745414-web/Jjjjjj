@@ -132,7 +132,7 @@ button.action{background:var(--theme);border:none;padding:10px 16px;border-radiu
         <div id="home" class="page active">
             <div class="header"><h1>Welcome back, <span id="username">User</span></h1></div>
             <div class="card"><i class="fa-solid fa-crown"></i><div><h3>Current Plan</h3><p id="planText">Nothing</p></div></div>
-            <div class="card" style="margin-top:20px"><i class="fa-solid fa-gamepad"></i><div><h3>Games Available</h3><p id="gamesCount">18</p></div></div>
+            <div class="card" style="margin-top:20px"><i class="fa-solid fa-gamepad"></i><div><h3>Games Available</h3><p id="gamesCount">19</p></div></div>
             <div class="activity"><h3>Recent Activity</h3><div class="activity-item"><span>Games</span><button onclick="goRecent()">Go To</button></div></div>
             <div class="card" style="margin-top:20px"><i class="fa-solid fa-code-branch"></i><div><h3>Version</h3><p>V2.3</p></div></div>
         </div>
@@ -166,6 +166,16 @@ button.action{background:var(--theme);border:none;padding:10px 16px;border-radiu
                 <div class="gamecard visible"><img src="https://t2.rbxcdn.com/180DAY-67b2be37ae31be00ab1319901b9d8347"><div class="gamecontent"><div class="gametitle">Roblox Tycoon Simulator</div><div class="tags"><div class="tag">Tycoon</div><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/123703214404726" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button></a></div></div>
                 <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-64ed83b556c759e8e2cd5b3f495c72a6/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">Survive LAVA for Brainrots!</div><div class="tags"><div class="tag">Survival</div><div class="tag">Brainrot</div></div><a href="https://www.roblox.com/games/114720820797718" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button></a></div></div>
                 <div class="gamecard visible"><img src="https://t3.rbxcdn.com/180DAY-3b2ec062707376a89a223ea44c20d408"><div class="gamecontent"><div class="gametitle">The rake</div><div class="tags"><div class="tag">Horror</div><div class="tag">Survival</div></div><a href="https://www.roblox.com/games/95489353515755" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button></a></div></div>
+                
+                <!-- NEW GAME -->
+                <div class="gamecard visible">
+                    <img src="https://tr.rbxcdn.com/180DAY-f0a7d44406d48c7286d8130fc37a48b5/768/432/Image/Webp/noFilter">
+                    <div class="gamecontent">
+                        <div class="gametitle">[ST PATRICKS DAY] Build a Brainrot Tycoon</div>
+                        <div class="tags"><div class="tag">Tycoon</div></div>
+                        <a href="https://www.roblox.com/games/77575557167707" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="settings" class="page">
@@ -199,4 +209,4 @@ if(localStorage.getItem("whitelisted")){unlockGames()}
 document.getElementById("gameSearch").addEventListener("input",function(e){let term=e.target.value.toLowerCase().trim(),cards=document.querySelectorAll(".gamecard"),count=0;cards.forEach(c=>{let title=c.querySelector(".gametitle").textContent.toLowerCase();if(term===""||title.includes(term)){c.classList.add("visible");count++}else{c.classList.remove("visible")}});document.getElementById("gamesCount").textContent=count});
 </script>
 </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                               </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                              </html>
