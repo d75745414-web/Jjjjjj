@@ -233,6 +233,10 @@ document.getElementById("gameSearch").addEventListener("input",function(e){let t
 const GROQ_API_KEY = "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";
 const MODEL_NAME = "llama-3.3-70b-versatile";
 
+let chatHistory = [
+    { role: "system", content: "You are Zypher AI. Keep it super chill and laid back. Talk like a real one — use ngl, tbh, fr, kinda, lowkey, deadass, no cap, etc. Never use emojis. Stay casual, short sentences. When giving code (especially Lua/Roblox scripts), always wrap it in triple backticks with the language like ```lua ... ``` so it renders nicely. Be helpful with scripts and explain them casually if needed." }
+];
+
 function addMessage(text, isUser = false) {
     const container = document.getElementById("chatContainer");
     const msgDiv = document.createElement("div");
@@ -252,6 +256,12 @@ function addMessage(text, isUser = false) {
     msgDiv.innerHTML = `<div class="message-content">${processedText}</div>`;
     container.appendChild(msgDiv);
     container.scrollTop = container.scrollHeight;
+
+    chatHistory.push({ role: isUser ? "user" : "assistant", content: text });
+
+    if (chatHistory.length > 15) {
+        chatHistory = [chatHistory[0], ...chatHistory.slice(-14)];
+    }
 }
 
 async function sendMessage() {
@@ -271,13 +281,7 @@ async function sendMessage() {
             },
             body: JSON.stringify({
                 model: MODEL_NAME,
-                messages: [
-                    {
-                        role: "system",
-                        content: "You are Zypher AI. Keep it super chill and laid back. Talk like a real one — use ngl, tbh, fr, kinda, lowkey, deadass, no cap, etc. Never use emojis. Stay casual, short sentences. When giving code (especially Lua/Roblox scripts), always wrap it in triple backticks with the language like ```lua ... ``` so it renders nicely. Be helpful with scripts and explain them casually if needed."
-                    },
-                    { role: "user", content: text }
-                ],
+                messages: chatHistory,
                 temperature: 0.9,
                 max_tokens: 1024
             })
@@ -286,7 +290,7 @@ async function sendMessage() {
         const data = await response.json();
         const reply = data.choices?.[0]?.message?.content?.trim() || "yo something broke ngl";
 
-        addMessage(reply);
+        addMessage(reply, false);
     } catch (err) {
         addMessage("damn something fucked up on my end tbh, try again later");
     }
@@ -295,4 +299,4 @@ async function sendMessage() {
 addMessage("yo whats good fr, hit me with whatever — scripts, questions, whatever", false);
 </script>
 </body>
-                                                                                                                                                                                                                                                                                                                                                        </html>
+            </html>
