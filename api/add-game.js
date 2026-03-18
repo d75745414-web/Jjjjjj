@@ -1,9 +1,7 @@
-import { kv } from "@vercel/kv";
+let games = [];
 
 export default async function handler(req, res) {
-    if (req.method !== "POST") {
-        return res.status(405).json({ error: "Method not allowed" });
-    }
+    if (req.method !== "POST") return res.status(405).end();
 
     const body = req.body;
 
@@ -11,25 +9,14 @@ export default async function handler(req, res) {
         return res.status(403).json({ error: "Unauthorized" });
     }
 
-    const placeId = String(body.placeId);
-    const name = String(body.name || "Unknown");
-
-    if (!placeId) {
-        return res.status(400).json({ error: "Missing placeId" });
-    }
-
-    const exists = await kv.get("game:" + placeId);
+    const exists = games.find(g => g.placeId == body.placeId);
 
     if (!exists) {
-        await kv.set("game:" + placeId, {
-            name: name,
-            placeId: placeId
+        games.push({
+            name: body.name,
+            placeId: body.placeId
         });
-
-        await kv.sadd("games:list", placeId);
     }
 
-    await kv.set("game:" + placeId + ":lastSeen", Date.now());
-
     res.status(200).json({ success: true });
-          }
+}
