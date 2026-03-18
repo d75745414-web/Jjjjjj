@@ -1,22 +1,18 @@
-let games = [];
+let games = []
 
-export default async function handler(req, res) {
-    if (req.method !== "POST") return res.status(405).end();
+export default function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Only POST allowed' })
 
-    const body = req.body;
+  const { key, name, placeId } = req.body
 
-    if (!body || body.key !== "a89xkJa") {
-        return res.status(403).json({ error: "Unauthorized" });
-    }
+  if (key !== 'a89xkJa') return res.status(401).json({ error: 'Invalid key' })
 
-    const exists = games.find(g => g.placeId == body.placeId);
+  if (!name || !placeId) return res.status(400).json({ error: 'Missing name or placeId' })
 
-    if (!exists) {
-        games.push({
-            name: body.name,
-            placeId: body.placeId
-        });
-    }
+  const exists = games.find(g => g.placeId === placeId)
+  if (!exists) {
+    games.push({ name, placeId })
+  }
 
-    res.status(200).json({ success: true });
+  return res.status(200).json({ success: true, game: { name, placeId }, totalGames: games.length })
 }
