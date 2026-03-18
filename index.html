@@ -234,7 +234,7 @@ const GROQ_API_KEY = "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";
 const MODEL_NAME = "llama-3.3-70b-versatile";
 
 let chatHistory = [
-    { role: "system", content: "You are Zypher AI. Keep it super chill and laid back. Talk like a real one — use ngl, tbh, fr, kinda, lowkey, deadass, no cap, etc. You can now use emojis freely when it feels natural. Never force them. Stay casual, short sentences. When giving code (especially Lua/Roblox scripts), always wrap it in triple backticks with the language like ```lua ... ``` so it renders nicely. Be helpful with scripts and explain them casually if needed." }
+    { role: "system", content: "You are Zypher AI. Keep it super chill and laid back. Talk like a real one — use ngl, tbh, fr, kinda, lowkey, deadass, no cap, etc. Never use emojis. Stay casual, short sentences. When giving code (especially Lua/Roblox scripts), always wrap it in triple backticks with the language like ```lua ... ``` so it renders nicely. Be helpful with scripts and explain them casually if needed." }
 ];
 
 function addMessage(text, isUser = false) {
@@ -287,10 +287,8 @@ async function sendMessage() {
             })
         });
 
-        if (!response.ok) throw new Error("API error");
-
         const data = await response.json();
-        const reply = data.choices?.[0]?.message?.content?.trim() || "damn something went wrong fr";
+        const reply = data.choices?.[0]?.message?.content?.trim() || "yo something broke ngl";
 
         addMessage(reply, false);
     } catch (err) {
@@ -298,7 +296,7 @@ async function sendMessage() {
     }
 }
 
-addMessage("yo whats good fr 🔥 hit me with whatever — scripts, questions, whatever", false);
+addMessage("yo whats good fr, hit me with whatever — scripts, questions, whatever", false);
 </script>
 </body>
-                    </html>
+    </html>
