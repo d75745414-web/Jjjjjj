@@ -1,3 +1,5 @@
+let games = [];
+
 export default function handler(req, res) {
-    res.status(200).json(games || []);
+  res.status(200).json({ games });
 }
